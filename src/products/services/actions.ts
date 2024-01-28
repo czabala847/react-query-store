@@ -30,3 +30,24 @@ export const getProductById = async (
     return undefined;
   }
 };
+
+export interface ProductLike {
+  id?: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+}
+
+export const createProduct = async (
+  body: ProductLike
+): Promise<Product | null> => {
+  try {
+    const { data } = await productsApi.post<Product>(`/products`, body);
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
